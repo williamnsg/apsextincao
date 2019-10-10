@@ -52,6 +52,16 @@ public class MenuPrincipal extends JFrame
 
 		JMenuItem mntmPesquisarAnimal = new JMenuItem("Pesquisar Animal");
 		mnOpes.add(mntmPesquisarAnimal);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ListarAnimal frame = new ListarAnimal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
 		JMenu mnAquivos = new JMenu("Aquivo");
 		menuBar.add(mnAquivos);
