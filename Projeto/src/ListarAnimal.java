@@ -24,6 +24,7 @@ public class ListarAnimal extends JFrame {
 	private ListarAnimal self;
 	private JScrollPane scrollPane;
 	private JTable tabela;
+	private JButton btnVoltar;
 
 	public ListarAnimal() {
 		self = this;
@@ -34,6 +35,7 @@ public class ListarAnimal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JLabel lblListadeAnimais = new JLabel("Lista de Animais");
 		lblListadeAnimais.setFont(new Font("Arial Black", Font.PLAIN, 18));
@@ -43,6 +45,17 @@ public class ListarAnimal extends JFrame {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 44, 382, 176);
 		contentPane.add(scrollPane);
+		
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false); // Remove a visibilidade da janela atual "Novo Animal", para retornar ao Menu Principal  
+				dispose();
+				VoltarMenu();
+			}
+		});
+		btnVoltar.setBounds(163, 228, 97, 25);
+		contentPane.add(btnVoltar);
 		atualizaTabela();
 		
 	}
@@ -67,7 +80,6 @@ public class ListarAnimal extends JFrame {
 					String pais_pertencente = res.getString("pais_pertencente");
 					String descricao = res.getString("descricao");
 					
-					//System.out.println("ID: " +id+ " NOME: " +nome+ " LOGIN: " + login);
 					Object[] objects = {id_animal,classe,nome,nome_cientifico,ano_extinto,pais_pertencente,descricao };
 					modelo.addRow(objects);
 				}
@@ -76,10 +88,17 @@ public class ListarAnimal extends JFrame {
 			}
 			scrollPane.setViewportView(tabela);
 			}
+	// Método para voltar ao Menu, ou melhor, fazer ele aparecer novamente...
+		public void VoltarMenu()
+		{ 
+			MenuPrincipal Menu = new MenuPrincipal();
+			Menu.setVisible(true);
+			//-------------------------------------------------------------------
+		}
 	
-	public static void main(String[] args) 
+	/*public static void main(String[] args) 
 	{
 		ListarAnimal la = new ListarAnimal();
 		la.setVisible(true);
-	}
+	}*/
 }

@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -52,14 +54,13 @@ public class MenuPrincipal extends JFrame
 
 		JMenuItem mntmPesquisarAnimal = new JMenuItem("Pesquisar Animal");
 		mnOpes.add(mntmPesquisarAnimal);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ListarAnimal frame = new ListarAnimal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		mntmPesquisarAnimal.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setVisible(false);
+				ListarAnimal JListarAnimal = new ListarAnimal();
+				JListarAnimal.setVisible(true);
+
 			}
 		});
 
