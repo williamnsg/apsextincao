@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class LerEscreverArq {
+public class LerEscreverArq 
+{
     ArrayList<String> linhas = new ArrayList();
-
+    
     public String Read(String Caminho){
         String conteudo = "";
 
@@ -21,7 +22,7 @@ public class LerEscreverArq {
                 while(linha!=null){
                     if(linha.substring(0,1).equals("#")){
                         linha = lerArq.readLine();
-                    }else{
+                    }else{                    	
                         conteudo += linha+"\n";
                         linhas.add(linha);
                         linha     = lerArq.readLine();
