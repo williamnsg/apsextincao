@@ -39,7 +39,7 @@ public class NovoMenu extends JFrame {
 		tituloAnimaisPanel.setLayout(null);
 		
 		JLabel lblAnimaisEmExtin = new JLabel("Animais em extin\u00E7\u00E3o");
-		lblAnimaisEmExtin.setBounds(317, 23, 213, 30);
+		lblAnimaisEmExtin.setBounds(317, 23, 338, 30);
 		tituloAnimaisPanel.add(lblAnimaisEmExtin);
 		lblAnimaisEmExtin.setForeground(new Color(255, 255, 255));
 		lblAnimaisEmExtin.setFont(new Font("Lato", Font.BOLD | Font.ITALIC, 24));
@@ -87,7 +87,7 @@ public class NovoMenu extends JFrame {
 		JLabel lblImportaoEExportao = new JLabel("Importa\u00E7\u00E3o e exporta\u00E7\u00E3o em txt");
 		lblImportaoEExportao.setForeground(Color.WHITE);
 		lblImportaoEExportao.setFont(new Font("Lato", Font.BOLD | Font.ITALIC, 14));
-		lblImportaoEExportao.setBounds(29, 105, 268, 14);
+		lblImportaoEExportao.setBounds(10, 105, 268, 14);
 		panel_3.add(lblImportaoEExportao);
 		
 		JButton btnCadastrarMenu = new JButton("");
@@ -141,8 +141,7 @@ public class NovoMenu extends JFrame {
 			nome = conteudo.split(";")[1];
 			cientifico = conteudo.split(";")[2];
 			extinto = conteudo.split(";")[3];
-			
-							
+
 			p.adicionar(classe + ";" + nome + ";" + cientifico + ";" + extinto + ";");			
 		}			
 		listarAnimais(classe,nome,cientifico,extinto);	
@@ -153,9 +152,9 @@ public class NovoMenu extends JFrame {
 	{
 		tabela = new JTable();
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-		String [] colunas = {"Classe", "Nome", "Nome cientifico","Ano de extinção"};
+		String [] colunas = {"Classe", "Nome", "Nome cientifico","Ano de extinï¿½ï¿½o"};
 		modelo.setColumnIdentifiers(colunas);
-		
+
 		Object[] objects = {classe,nome,nomeCient,anoExt};		
 		modelo.addRow(objects);
 		
