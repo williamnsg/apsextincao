@@ -19,7 +19,7 @@ public class NovoMenu extends JFrame {
 	private JPanel contentPane;
 	JTable tabela;
 	private Pilha p = new Pilha();
-	JScrollPane scrollPane = new JScrollPane();
+	JScrollPane scrollPane;
 	
 	public NovoMenu() 
 	{				
@@ -134,6 +134,12 @@ public class NovoMenu extends JFrame {
 		// LEITURA
 		io.Read(ImportarExportar.caminho);
 
+		//Criar a tabela
+		tabela = new JTable();
+		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+		String [] colunas = {"Classe", "Nome", "Nome cientifico","Ano de extincao"};
+		modelo.setColumnIdentifiers(colunas);
+		
 		for (int i = 0; i < 4; i++) 
 		{
 			conteudo = io.linhasDocumento(i);
@@ -142,22 +148,11 @@ public class NovoMenu extends JFrame {
 			cientifico = conteudo.split(";")[2];
 			extinto = conteudo.split(";")[3];
 
-			p.adicionar(classe + ";" + nome + ";" + cientifico + ";" + extinto + ";");			
-		}			
-		listarAnimais(classe,nome,cientifico,extinto);	
-		p.mostrar();
-	}
-	
-	public void listarAnimais(String classe,String nome,String nomeCient,String anoExt) 
-	{
-		tabela = new JTable();
-		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
-		String [] colunas = {"Classe", "Nome", "Nome cientifico","Ano de extin��o"};
-		modelo.setColumnIdentifiers(colunas);
-
-		Object[] objects = {classe,nome,nomeCient,anoExt};		
-		modelo.addRow(objects);
-		
+			p.adicionar(classe + ";" + nome + ";" + cientifico + ";" + extinto + ";");		
+			Object[] objects = {classe,nome,cientifico,extinto};		
+			modelo.addRow(objects);
+		}	
 		scrollPane.setViewportView(tabela);
+		p.mostrar();
 	}
 }
