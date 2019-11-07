@@ -26,7 +26,6 @@ public class ManipularArquivo
                         conteudo += linha+"\n";
                         linhas.add(linha);
                         linha     = lerArq.readLine();
-
                     }
                 }
                 arq.close();

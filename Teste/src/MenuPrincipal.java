@@ -152,7 +152,8 @@ public class MenuPrincipal extends JFrame
 	public void importarDados() 
 	{
 		// parametros de leitura/escrita
-		ManipularArquivo io = new ManipularArquivo();
+		LerTxt leitura = new LerTxt();
+		//ManipularArquivo io = new ManipularArquivo();
 		FileSystemView system = FileSystemView.getFileSystemView();
 		
 		String conteudo = "";
@@ -168,11 +169,11 @@ public class MenuPrincipal extends JFrame
 		modelo.setColumnIdentifiers(colunas);
 		
 		// LEITURA
-		io.Read(getCaminho());
+		leitura.lerArquivo(getCaminho());
 
-		for (int i = 0; i <io.linhas.size(); i++) 
+		for (int i = 0; i <leitura.arqTxt.size(); i++) 
 		{					
-			conteudo = io.linhasDocumento(i);
+			conteudo = leitura.linhasDocumento(i);
 			classe = conteudo.split(";")[0];
 			nome = conteudo.split(";")[1];
 			cientifico = conteudo.split(";")[2];
@@ -190,11 +191,14 @@ public class MenuPrincipal extends JFrame
 	
 	public void excluir() 
 	{
+		//ManipularArquivo io = new ManipularArquivo();
+		RemoveTxt r = new RemoveTxt();
 		int linha = tabela.getSelectedRow();
 		
-		if(linha >=1) 
-		{
+		if(linha >=0) 
+		{			
 			System.out.println(linha);
+			r.removeLine(linha);
 		}
 		else 
 		{
