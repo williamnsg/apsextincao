@@ -30,7 +30,7 @@ import javax.swing.JOptionPane;
 public class MenuPrincipal extends JFrame 
 {
 	JPanel contentPane;
-	private String caminho;
+	private static String caminho;
 	private JTable tabela;
 	private JScrollPane scrollPane;
 	
@@ -206,7 +206,7 @@ public class MenuPrincipal extends JFrame
 		}
 	}
 
-	public String getCaminho() {
+	public static String getCaminho() {
 		return caminho;
 	}
 

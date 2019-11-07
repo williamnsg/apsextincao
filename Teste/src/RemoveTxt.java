@@ -3,19 +3,21 @@ import java.util.ArrayList;
 public class RemoveTxt {
     LerTxt lerTxt;
     EscreverTxt escreveTxt;
-    private String[] dadosCadastro;
-    MenuPrincipal menu = new MenuPrincipal();
-
-    public RemoveTxt(){
-        lerTxt        = new LerTxt();
+    private String[] dadosCadastro;    
+    
+    public RemoveTxt()
+    {    	
+    	lerTxt        = new LerTxt();
         escreveTxt    = new EscreverTxt();
         dadosCadastro = new String[5];
     }
 
-    public void removeLine(int idCadastro){
+    public void removeLine(int idCadastro)
+    {   
         String aux                  = "";
         ArrayList<String> dadosArqu = new ArrayList<>();
-        lerTxt.lerArquivo(menu.getCaminho());
+        System.out.println(MenuPrincipal.getCaminho());
+        lerTxt.lerArquivo(MenuPrincipal.getCaminho());
 
         /*
             O primeiro if abaixo verifica se o "idCadastro" é maior que o tamanho de linhas ou menor que 0.
@@ -45,7 +47,7 @@ public class RemoveTxt {
         for(int i = 0; i < dadosArqu.size(); i++){
             aux += dadosArqu.get(i)+"\n";
         }
-        escreveTxt.write("",menu.getCaminho());
+        escreveTxt.write("",MenuPrincipal.getCaminho());
     }//removeLine()
 
 //    public static void main(String arg[]){
