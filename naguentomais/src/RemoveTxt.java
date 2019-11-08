@@ -14,7 +14,7 @@ public class RemoveTxt {
 
     public void removeLine(int idCadastro)
     {   
-        String aux                  = ""; //Recebe todo o conteúdo das linhas do txt
+        String aux                  = ""; //Recebe todo o conteï¿½do das linhas do txt
         ArrayList<String> dadosArqu = new ArrayList<>();
         System.out.println(MenuPrincipal.getCaminho());
         lerTxt.lerArquivo(MenuPrincipal.getCaminho());
@@ -47,7 +47,7 @@ public class RemoveTxt {
         for(int i = 0; i < dadosArqu.size(); i++){
             aux += dadosArqu.get(i)+"\n";
         }
-        escreveTxt.write(aux,MenuPrincipal.getCaminho());
+        escreveTxt.write(aux,MenuPrincipal.getCaminho(),false);
     }//removeLine()
 
 //    public static void main(String arg[]){

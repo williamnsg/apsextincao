@@ -110,6 +110,7 @@ public class MenuPrincipal extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				importarDados();
+
 			}
 		});
 		btnAtualizar.setBounds(30, 626, 89, 23);
@@ -119,16 +120,16 @@ public class MenuPrincipal extends JFrame
 	public void procurarArquivo() 
 	{
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setDialogTitle("Buscar arquivo .txt"); // Título
+		fileChooser.setDialogTitle("Buscar arquivo .txt"); // Tï¿½tulo
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // Mostrar apenas arquivos
 
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt"); // Filtro para extensão
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt"); // Filtro para extensï¿½o
 																						// .txt
 		fileChooser.setFileFilter(filter);
 
 		int decisao = fileChooser.showOpenDialog(null); // Verificador
 
-		if (decisao == JFileChooser.APPROVE_OPTION) { // Verificar se o usuário abriu o arquivo ou cancelou
+		if (decisao == JFileChooser.APPROVE_OPTION) { // Verificar se o usuï¿½rio abriu o arquivo ou cancelou
 
 			File file = fileChooser.getSelectedFile(); // Pegar o arquivo selecionado
 			//importarField.setText(file.getPath()); // Mostrar o caminho do arquivo no Text Field
@@ -192,7 +193,7 @@ public class MenuPrincipal extends JFrame
 		}
 		else 
 		{
-			JOptionPane.showMessageDialog(null, "É necessário selecionar uma linha.");
+			JOptionPane.showMessageDialog(null, "ï¿½ necessï¿½rio selecionar uma linha.");
 		}
 	}
 

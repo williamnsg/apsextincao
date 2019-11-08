@@ -170,7 +170,7 @@ public class NovoAnimal extends JFrame
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("Lato", Font.BOLD | Font.ITALIC, 14));
 		
-				JButton btnVoltar = new JButton("");
+				JButton btnVoltar = new JButton("Voltar");
 				btnVoltar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) 
 					{
@@ -182,19 +182,19 @@ public class NovoAnimal extends JFrame
 				panel_3.add(btnVoltar);
 				btnVoltar.setBackground(new Color(0, 102, 0));
 				
-				JButton btnAdd = new JButton("Add");
+				JButton btnAdd = new JButton("Adicionar");
 				btnAdd.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e)
 					{	
 						EscreverTxt escrita = new EscreverTxt();
-						
 						String novoTexto;
 						novoTexto = classeComboBox.getSelectedItem().toString() +";"+nomeAnimal.getText() 
 						+ ";" + nomeCientifico.getText()+ ";"+anoExtinto.getText() + ";" + paisPertence.getText()+ ";";
 						
 //						ManipularArquivo io = new ManipularArquivo();
 //						FileSystemView system = FileSystemView.getFileSystemView();
-						escrita.write(novoTexto,MenuPrincipal.getCaminho());
+						escrita.write(novoTexto,MenuPrincipal.getCaminho(), true);
+
 						self.dispose();
 					}
 				});

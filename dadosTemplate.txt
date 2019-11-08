@@ -1,5 +1,5 @@
-Mamifero;Onça-pintada;Panthera onca;0;A onça-pintada, o maior felino das Américas;Brasil;
-Mamifero;Lobo;Chrysocyon brachyurus;0;descricao;Brasil;
-Peixes;Baleia-fin;Balaenoptera physalus;0;A baleia-fin é a segunda maior espécie baleia;Hemisferio Sul;
-Aves;Condor-californiano;Gymnogyps californianus;0;A ave é vítima da caça esportiva;Estados Unidos da America;
-Lobo;Chrysocyon brachyurus;0;descricao;Brasil;
+Aves0;teste;teeste;123 ;ede222;Répteis;teste;testetttt;123 ;12333dd;
+Aves1;teste;teeste;123 ;ede222;Répteis;teste;testetttt;123 ;12333dd;
+Aves2;teste;teeste;123 ;ede222;Répteis;teste;testetttt;123 ;12333dd;
+Aves3;teste;teeste;123 ;ede222;Répteis;teste;testetttt;123 ;12333dd;
+Aves4;teste;teeste;123 ;ede222;Répteis;teste;testetttt;123 ;12333dd;

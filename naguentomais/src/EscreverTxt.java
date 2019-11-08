@@ -2,10 +2,10 @@ import java.io.*;
 
 public class EscreverTxt {
 
-    public boolean write(String txt,String caminho)
+    public boolean write(String txt,String caminho, boolean cadastra)//se for cadastrar um novo registro, true.
     {
         try{        	
-            FileWriter arq        = new FileWriter(caminho, true);
+            FileWriter arq        = new FileWriter(caminho, cadastra);
             PrintWriter gravarArq = new PrintWriter(arq);
             gravarArq.write(txt);
             gravarArq.close();
