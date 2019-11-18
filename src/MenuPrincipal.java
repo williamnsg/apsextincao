@@ -20,6 +20,8 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -27,25 +29,26 @@ import java.awt.Color;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+@SuppressWarnings({ "unused", "serial" })
 public class MenuPrincipal extends JFrame 
 {
 	JPanel contentPane;
 	private static String caminho;
 	private JTable tabela;
-	private JScrollPane scrollPane;
-	
+	static Pilha p = new Pilha();
+
 	public MenuPrincipal() 
 	{
 		setTitle("Animais em extincao");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1280, 720);
-		
+		setBounds(100, 100, 761, 572);
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnAnimais = new JMenu("Arquivo");
 		menuBar.add(mnAnimais);
-		
+
 		JMenuItem mntmNovoAnimal = new JMenuItem("Importar");
 		mntmNovoAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
@@ -54,7 +57,7 @@ public class MenuPrincipal extends JFrame
 			}
 		});
 		mnAnimais.add(mntmNovoAnimal);
-		
+
 		JMenuItem mntmExportar = new JMenuItem("Exportar");
 		mntmExportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
@@ -63,10 +66,10 @@ public class MenuPrincipal extends JFrame
 			}
 		});
 		mnAnimais.add(mntmExportar);
-		
+
 		JMenu mnAnimais_1 = new JMenu("Animais");
 		menuBar.add(mnAnimais_1);
-		
+
 		JMenuItem mntmNovo = new JMenuItem("Adicionar");
 		mntmNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
@@ -75,17 +78,29 @@ public class MenuPrincipal extends JFrame
 				jNovo.setVisible(true);
 			}
 		});
-		mnAnimais_1.add(mntmNovo);
+
+		JMenuItem mntmListar = new JMenuItem("Listar");
+		mnAnimais_1.add(mntmListar);
 		
+		mntmListar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) 
+			{
+				JanelaListar JListar = new JanelaListar();
+				JListar.setVisible(true);
+			}
+		});
+
+		mnAnimais_1.add(mntmNovo);
+
 		JMenuItem mntmRemover = new JMenuItem("Remover");
 		mntmRemover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				excluir();
+				
 			}
 		});
 		mnAnimais_1.add(mntmRemover);
-		
+
 		JMenuItem mntmOrdenar = new JMenuItem("Ordenar");
 		mnAnimais_1.add(mntmOrdenar);
 		contentPane = new JPanel();
@@ -95,28 +110,14 @@ public class MenuPrincipal extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(30, 111, 1200, 500);
-		contentPane.add(scrollPane);
-		
-		JLabel lblListaDeAnimais = new JLabel("Lista de animais em extincao");
-		lblListaDeAnimais.setFont(new Font("Arial", Font.PLAIN, 24));
-		lblListaDeAnimais.setBounds(30, 77, 372, 23);
-		contentPane.add(lblListaDeAnimais);
-		
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				importarDados();
 
-			}
-		});
-		btnAtualizar.setBounds(30, 626, 89, 23);
-		contentPane.add(btnAtualizar);
+		JLabel lblNewLabel = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/map.jpg")).getImage();
+		lblNewLabel.setIcon(new ImageIcon (img));
+		lblNewLabel.setBounds(0, 0, 750, 517);
+		this.getContentPane().add(lblNewLabel);
 	}
-	
+
 	public void procurarArquivo() 
 	{
 		JFileChooser fileChooser = new JFileChooser();
@@ -124,7 +125,7 @@ public class MenuPrincipal extends JFrame
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // Mostrar apenas arquivos
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt"); // Filtro para extens�o
-																						// .txt
+		// .txt
 		fileChooser.setFileFilter(filter);
 
 		int decisao = fileChooser.showOpenDialog(null); // Verificador
@@ -139,14 +140,15 @@ public class MenuPrincipal extends JFrame
 			importarDados();
 		}
 	}
-	
+
 	public void importarDados() 
 	{
 		// parametros de leitura/escrita
 		LerTxt leitura = new LerTxt();
 		//ManipularArquivo io = new ManipularArquivo();
+		@SuppressWarnings("unused")
 		FileSystemView system = FileSystemView.getFileSystemView();
-		
+
 		String conteudo = "";
 		String nome = "";
 		String cientifico = "";
@@ -158,7 +160,7 @@ public class MenuPrincipal extends JFrame
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		String [] colunas = {"Classe", "Nome", "Nome Cientifico","Ano Extinto", "Pais de origem"};
 		modelo.setColumnIdentifiers(colunas);
-		
+
 		// LEITURA
 		leitura.lerArquivo(getCaminho());
 
@@ -176,25 +178,10 @@ public class MenuPrincipal extends JFrame
 			System.out.println(text);
 			Object[] objects = {classe, nome, cientifico,extinto,pais};
 			modelo.addRow(objects);
+			
+			p.adicionar(conteudo);
 		}
-		scrollPane.setViewportView(tabela);
-	}
-	
-	public void excluir() 
-	{
-		//ManipularArquivo io = new ManipularArquivo();
-		RemoveTxt r = new RemoveTxt();
-		int linha = tabela.getSelectedRow();
-		
-		if(linha >=0) 
-		{			
-			r.removeLine(linha);
-			importarDados();
-		}
-		else 
-		{
-			JOptionPane.showMessageDialog(null, "� necess�rio selecionar uma linha.");
-		}
+
 	}
 
 	public static String getCaminho() {

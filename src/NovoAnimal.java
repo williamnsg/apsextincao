@@ -1,41 +1,20 @@
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.text.MaskFormatter;
-//import javax.xml.bind.helpers.ParseConversionEventImpl;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JList;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
 import javax.swing.JFormattedTextField;
-import javax.swing.JSpinner;
-import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JTextArea;
-import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
-//import com.jgoodies.forms.layout.FormLayout;
-//import com.jgoodies.forms.layout.ColumnSpec;
-//import com.jgoodies.forms.layout.FormSpecs;
-//import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
@@ -201,42 +180,47 @@ public class NovoAnimal extends JFrame
 		panel_3.add(lblVoltar);
 		lblVoltar.setForeground(Color.WHITE);
 		lblVoltar.setFont(new Font("Lato", Font.BOLD | Font.ITALIC, 14));
-		
-				JButton btnVoltar = new JButton("Voltar");
-				btnVoltar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) 
-					{
-						self.dispose();
-					}
-				});
-				btnVoltar.setIcon(new ImageIcon("C:\\Users\\Felipe\\Desktop\\back.png"));
-				btnVoltar.setBounds(10, 48, 89, 23);
-				panel_3.add(btnVoltar);
-				btnVoltar.setBackground(UIManager.getColor("CheckBox.background"));
-				
-				JButton btnAdd = new JButton("Adicionar");
-				btnAdd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e)
-					{	
-						EscreverTxt escrita = new EscreverTxt();
-						String novoTexto;
-						String novoDado;
-						
-						novoTexto = classeComboBox.getSelectedItem().toString() +";"+nomeAnimal.getText()
-						+ ";" + nomeCientifico.getText()+ ";"+anoExtinto.getText() ;
-	
-						novoDado = "INSERT INTO Animais (nome_animal,nome_cientifico,ano_extinto,pais,classe) values ('"+ nomeAnimal.getText() +"','"+ nomeCientifico.getText()+"','"+ 
-								anoExtinto.getText()+"','"+ paisComboBox.getSelectedItem()+"','"+ classeComboBox.getSelectedItem() +"')";
-						
-						DB.connect("database.db3");
-						DB.execQuery(novoDado);						
-						escrita.write(novoTexto,MenuPrincipal.getCaminho(), true);
 
-						self.dispose();
-					}
-				});
-				btnAdd.setBounds(158, 48, 89, 23);
-				panel_3.add(btnAdd);
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				self.dispose();
+			}
+		});
+		
+		btnVoltar.setIcon(new ImageIcon("C:\\Users\\Felipe\\Desktop\\back.png"));
+		btnVoltar.setBounds(10, 48, 89, 23);
+		panel_3.add(btnVoltar);
+		btnVoltar.setBackground(UIManager.getColor("CheckBox.background"));
+
+		JButton btnAdd = new JButton("Adicionar");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				EscreverTxt escrita = new EscreverTxt();
+				String novoTexto;
+				String novoDado;
+
+				novoTexto = classeComboBox.getSelectedItem().toString() + ";" + nomeAnimal.getText() + ";"
+						+ nomeCientifico.getText() + ";" + anoExtinto.getText() +";" + paisComboBox.getSelectedItem()+";";
+
+				novoDado = "INSERT INTO Animais (nome_animal,nome_cientifico,ano_extinto,pais,classe) values ('"
+						+ nomeAnimal.getText() + "','" + nomeCientifico.getText() + "','" + anoExtinto.getText() + "','"
+						+ paisComboBox.getSelectedItem() + "','" + classeComboBox.getSelectedItem() + "')";
+
+				DB.connect("database.db3");
+				DB.execQuery(novoDado);
+				escrita.write(novoTexto, MenuPrincipal.getCaminho(), true);
+				MenuPrincipal.p.adicionar(novoTexto);
+				JanelaListar.listarPilha();
+
+				self.dispose();
+			}
+		});
+		
+		btnAdd.setBounds(158, 48, 89, 23);
+		panel_3.add(btnAdd);
 	}
 }
 

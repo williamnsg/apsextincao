@@ -50,9 +50,10 @@ public class Pilha
 	public void remover() 
 	{
 		if(!estaVazia())
-		{
+		{			
 			fim--;
-			qntdeElementos--;
+			qntdeElementos--;	
+			System.out.println(fim);			
 		}
 	}
 	
@@ -64,7 +65,17 @@ public class Pilha
 		{
 			elementos += p[i] + "\n" ;
 		}
+	}
+	
+	public String listarElementos(int num) 
+	{
+		String elementos = p[num-1];
 		
-		System.out.println(elementos);
+		return elementos;
+	}
+	
+	public int tamanhoPilha() 
+	{
+		return qntdeElementos;
 	}
 }
