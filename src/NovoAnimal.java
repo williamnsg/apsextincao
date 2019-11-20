@@ -182,6 +182,7 @@ public class NovoAnimal extends JFrame
 		lblVoltar.setFont(new Font("Lato", Font.BOLD | Font.ITALIC, 14));
 
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setToolTipText("Voltar para menu principal");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -195,6 +196,7 @@ public class NovoAnimal extends JFrame
 		btnVoltar.setBackground(UIManager.getColor("CheckBox.background"));
 
 		JButton btnAdd = new JButton("Adicionar");
+		btnAdd.setToolTipText("Adiciona um animal na fila,pilha e no banco de dados");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -212,8 +214,10 @@ public class NovoAnimal extends JFrame
 				DB.connect("database.db3");
 				DB.execQuery(novoDado);
 				escrita.write(novoTexto, MenuPrincipal.getCaminho(), true);
-				MenuPrincipal.p.adicionar(novoTexto);
+				MenuPrincipal.p.push(novoTexto);
+				MenuPrincipal.f.enqueue(novoTexto);
 				JanelaListar.listarPilha();
+				JanelaListar.listarFila();
 
 				self.dispose();
 			}

@@ -36,6 +36,7 @@ public class MenuPrincipal extends JFrame
 	private static String caminho;
 	private JTable tabela;
 	static Pilha p = new Pilha();
+	static Fila f = new Fila();
 
 	public MenuPrincipal() 
 	{
@@ -50,6 +51,7 @@ public class MenuPrincipal extends JFrame
 		menuBar.add(mnAnimais);
 
 		JMenuItem mntmNovoAnimal = new JMenuItem("Importar");
+		mntmNovoAnimal.setToolTipText("Importa dados de um arquivo txt, clicar na op\u00E7\u00E3o animais em seguida,listar para vizualizar. Coloca os dados no banco de dados tambem.");
 		mntmNovoAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -59,6 +61,7 @@ public class MenuPrincipal extends JFrame
 		mnAnimais.add(mntmNovoAnimal);
 
 		JMenuItem mntmExportar = new JMenuItem("Exportar");
+		mntmExportar.setToolTipText("Exporta os dados que est\u00E3o no banco de dados depois de terem sido manipulados pela ordena\u00E7\u00E3o ou n\u00E3o em um  novo arquivo txt.");
 		mntmExportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -70,39 +73,29 @@ public class MenuPrincipal extends JFrame
 		JMenu mnAnimais_1 = new JMenu("Animais");
 		menuBar.add(mnAnimais_1);
 
-		JMenuItem mntmNovo = new JMenuItem("Adicionar");
-		mntmNovo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				NovoAnimal jNovo = new NovoAnimal();
-				jNovo.setVisible(true);
-			}
-		});
-
 		JMenuItem mntmListar = new JMenuItem("Listar");
+		mntmListar.setToolTipText("Lista os dados importados do arquivo txt.");
 		mnAnimais_1.add(mntmListar);
 		
 		mntmListar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) 
 			{
-				JanelaListar JListar = new JanelaListar();
-				JListar.setVisible(true);
+				JanelaListar jListar = new JanelaListar();
+				jListar.setVisible(true);
 			}
 		});
-
-		mnAnimais_1.add(mntmNovo);
-
-		JMenuItem mntmRemover = new JMenuItem("Remover");
-		mntmRemover.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				
-			}
-		});
-		mnAnimais_1.add(mntmRemover);
 
 		JMenuItem mntmOrdenar = new JMenuItem("Ordenar");
+		mntmOrdenar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				JanelaOrdenacao jOrdenar = new JanelaOrdenacao();
+				jOrdenar.setVisible(true);
+			}
+		});
+		mntmOrdenar.setToolTipText("Ordena os dados atrav\u00E9s de dois metodos de ordena\u00E7\u00E3o.");
 		mnAnimais_1.add(mntmOrdenar);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 250));
 		contentPane.setForeground(new Color(135, 206, 235));
@@ -114,7 +107,7 @@ public class MenuPrincipal extends JFrame
 		JLabel lblNewLabel = new JLabel("");
 		Image img = new ImageIcon(this.getClass().getResource("/map.jpg")).getImage();
 		lblNewLabel.setIcon(new ImageIcon (img));
-		lblNewLabel.setBounds(0, 0, 750, 517);
+		lblNewLabel.setBounds(0, 0, 750, 512);
 		this.getContentPane().add(lblNewLabel);
 	}
 
@@ -145,8 +138,6 @@ public class MenuPrincipal extends JFrame
 	{
 		// parametros de leitura/escrita
 		LerTxt leitura = new LerTxt();
-		//ManipularArquivo io = new ManipularArquivo();
-		@SuppressWarnings("unused")
 		FileSystemView system = FileSystemView.getFileSystemView();
 
 		String conteudo = "";
@@ -179,9 +170,9 @@ public class MenuPrincipal extends JFrame
 			Object[] objects = {classe, nome, cientifico,extinto,pais};
 			modelo.addRow(objects);
 			
-			p.adicionar(conteudo);
+			p.push(conteudo);
+			f.enqueue(conteudo);
 		}
-
 	}
 
 	public static String getCaminho() {

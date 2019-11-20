@@ -1,17 +1,16 @@
-
-public class Pilha
+public class Fila 
 {
 	int inicio;
 	int fim;
 	int tamanho;
 	int qntdeElementos;
-	String p[];
+	String f[];
 	
-	public Pilha()
+	public Fila()
 	{
 		inicio = fim = -1;
 		tamanho = 10;
-		p = new String[tamanho];
+		f = new String[tamanho];
 		qntdeElementos = 0;
 	}
 	
@@ -33,7 +32,7 @@ public class Pilha
 		return false;
 	}
 	
-	public void push(String e)
+	public void enqueue(String e)
 	{
 		if(!estaCheia()) 
 		{
@@ -42,18 +41,17 @@ public class Pilha
 				inicio = 0;
 			}
 			fim++;
-			p[fim] = e;
+			f[fim] = e;
 			qntdeElementos++;
 		}
 	}
 	
-	public void pop() 
+	public void dequeue() 
 	{
 		if(!estaVazia())
-		{			
-			fim--;
-			qntdeElementos--;	
-			System.out.println(fim);			
+		{
+			inicio++;
+			qntdeElementos--;
 		}
 	}
 	
@@ -61,21 +59,23 @@ public class Pilha
 	{
 		String elementos = "";
 		
-		for(int i=fim;i>=0;i--)
+		for(int i=inicio;i<=fim;i++)
 		{
-			elementos += p[i] + "\n" ;
+			elementos += f[i] + "\n" ;
 		}
-	}
-	
-	public String listarElementos(int num) 
-	{
-		String elementos = p[num-1];
 		
-		return elementos;
+		System.out.println(elementos);
 	}
 	
-	public int tamanhoPilha() 
+	public int tamanhoFila() 
 	{
 		return qntdeElementos;
+	}
+
+	public String listarElementos(int num) 
+	{
+		String elementos = f[num];
+		
+		return elementos;
 	}
 }

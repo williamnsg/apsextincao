@@ -13,15 +13,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 
 public class JanelaListar extends JFrame {
 
 	private JPanel contentPane;
-	private static JTable tabela;
+	private static JTable tabelaPilha;
+	private static JTable tabelaFila;
 	private static JScrollPane scrollPanePilha;
-	JScrollPane scrollPaneFila;
-	static DefaultTableModel modelo;
+	private static JScrollPane scrollPaneFila;
+	static DefaultTableModel modeloPilha;
+	static DefaultTableModel modeloFila;
 	
 	public JanelaListar() 
 	{
@@ -61,6 +64,7 @@ public class JanelaListar extends JFrame {
 		panelCorpoLista.add(scrollPaneFila);
 
 		JButton btnPush = new JButton("PUSH");
+		btnPush.setToolTipText("Insere um novo dado na pilha e no banco de dados");
 		btnPush.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -72,21 +76,32 @@ public class JanelaListar extends JFrame {
 		panelCorpoLista.add(btnPush);
 
 		JButton btnPop = new JButton("POP");
+		btnPop.setToolTipText("Retira um dado da pilha");
 		btnPop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
-			{
-				MenuPrincipal.p.remover();
+			{							
+				MenuPrincipal.p.pop();
 				listarPilha();
 			}
 		});
+		
 		btnPop.setBounds(278, 487, 89, 23);
 		panelCorpoLista.add(btnPop);
 
 		JButton btnInserir = new JButton("INSERIR");
+		btnInserir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				NovoAnimal j = new NovoAnimal();
+				j.setVisible(true);
+			}
+		});
+		btnInserir.setToolTipText("Insere um novo dado na fila");
 		btnInserir.setBounds(587, 487, 89, 23);
 		panelCorpoLista.add(btnInserir);
 
 		JButton btnRemover = new JButton("REMOVER");
+		btnRemover.setToolTipText("Retira um dado da fila");
 		btnRemover.setBounds(790, 487, 104, 23);
 		panelCorpoLista.add(btnRemover);
 
@@ -101,6 +116,7 @@ public class JanelaListar extends JFrame {
 		panelCorpoLista.add(lblPilha);
 
 		listarPilha();
+		listarFila();
 	}
 	
 	public static void listarPilha() 
@@ -113,10 +129,10 @@ public class JanelaListar extends JFrame {
 		String pais = "";
 		int aux = MenuPrincipal.p.tamanhoPilha();
 
-		tabela = new JTable();
-		modelo = (DefaultTableModel) tabela.getModel();
+		tabelaPilha = new JTable();		
+		modeloPilha = (DefaultTableModel) tabelaPilha.getModel();
 		String[] colunas = { "Classe", "Nome", "Nome Cientifico", "Ano Extinto", "Pais de origem" };
-		modelo.setColumnIdentifiers(colunas);
+		modeloPilha.setColumnIdentifiers(colunas);
 
 		MenuPrincipal.p.mostrar();
 		
@@ -133,10 +149,45 @@ public class JanelaListar extends JFrame {
 			pais = conteudo.split(";")[4];
 
 			Object[] objects = { classe, nome, cientifico, ano_extinto, pais };
-			modelo.addRow(objects);
+			modeloPilha.addRow(objects);
 			aux--;
 		}
 
-		scrollPanePilha.setViewportView(tabela);
+		scrollPanePilha.setViewportView(tabelaPilha);
+	}
+	
+	public static void listarFila() 
+	{
+		String conteudo = "";
+		String nome = "";
+		String cientifico = "";
+		String ano_extinto = "";
+		String classe = "";
+		String pais = "";
+		
+		tabelaFila = new JTable();		
+		modeloFila = (DefaultTableModel) tabelaFila.getModel();
+		String[] colunas = { "Classe", "Nome", "Nome Cientifico", "Ano Extinto", "Pais de origem" };
+		modeloFila.setColumnIdentifiers(colunas);
+				
+		System.out.println("Existem " + MenuPrincipal.f.qntdeElementos + "elementos");
+
+		for (int i = 0; i < MenuPrincipal.f.tamanhoFila(); i++) 
+		{
+			conteudo = MenuPrincipal.f.listarElementos(i);
+			
+			classe = conteudo.split(";")[0];
+			nome = conteudo.split(";")[1];
+			cientifico = conteudo.split(";")[2];
+			ano_extinto = conteudo.split(";")[3];
+			pais = conteudo.split(";")[4];
+
+			Object[] objects = { classe, nome, cientifico, ano_extinto, pais };
+			
+			modeloFila.addRow(objects);
+		}
+
+		scrollPaneFila.setViewportView(tabelaFila);
+
 	}	
 }
