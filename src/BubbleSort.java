@@ -1,6 +1,8 @@
-public class BubbleSort 
-{
+import java.util.Random;
 
+public class BubbleSort
+{
+		private long tempoExecucao = 0;
         private String[] vetor;
 
         public String[] getVetor() {
@@ -8,8 +10,15 @@ public class BubbleSort
         }
 
         public void setVetor(String[] vetor) {
-            this.vetor = vetor;
+            this.vetor        = vetor;
+            long tempoInicial = System.currentTimeMillis();
             bubbleSort();
+            long tempoFinal = System.currentTimeMillis();
+            tempoExecucao   = tempoFinal - tempoInicial ;
+        }
+        
+        public String getTempoExecucao() {
+        	return ""+tempoExecucao;
         }
 
         public void bubbleSort() {
@@ -24,18 +33,6 @@ public class BubbleSort
                     }
                 }
             }
-        }
-/*
-        public static void main(String[] args) {
-            String vector[] = {"z", "g", "a", "c", "b"};
-            BubbleSort o = new BubbleSort();
-            o.setVetor(vector);
-            o.bubbleSort();
-            vector = o.getVetor();
-
-            for (String i : vector)
-                System.out.print(i + " ");
-        }//main*/
-
+        }        
 }//class
 

@@ -1,37 +1,33 @@
-public class SelectionSort 
-{
+import java.util.Random;
 
+public class SelectionSort
+{
+	private long tempoExecucao=0;
+	
+	public String getTempoExecucao(){
+		return ""+tempoExecucao;
+	}
+	
 	 public String[] selectionSort( String[] array )
 	    {
-
-	        // Encontre a referência de string que deve ir em cada célula de
-	        // a matriz, da célula 0 até o final
+		 	long tempoInicial = System.currentTimeMillis();
+		 	
+	        // Encontre a referï¿½ncia de string que deve ir em cada cï¿½lula de
+	        // a matriz, da cï¿½lula 0 atï¿½ o final
 	        for ( int j=0; j < array.length-1; j++ )
 	        {
-	            // Find min: o índice da referência de string que deve entrar na célula j.
-	            // Procure nas cadeias não classificadas (aquelas em j ou mais) a que é a primeira em ordem lexicográfica
+	            // Find min: o ï¿½ndice da referï¿½ncia de string que deve entrar na cï¿½lula j.
+	            // Procure nas cadeias nï¿½o classificadas (aquelas em j ou mais) a que ï¿½ a primeira em ordem lexicogrï¿½fica
 	            int min = j;
 	            for ( int k=j+1; k < array.length; k++ )
 	                if ( array[k].compareTo( array[min] ) < 0 ) min = k;
 
 	            String temp = array[j];
-	            array[j] = array[min];
-	            array[min] = temp;
+	            array[j]    = array[min];
+	            array[min]  = temp;
 	        }
+	        long tempoFinal = System.currentTimeMillis();      
+	        tempoExecucao   =  tempoFinal - tempoInicial;
 	        return array;
 	    }
-/*
-	    public static void main(String arg[]){
-	        SelectionSort obj = new SelectionSort();
-	        String vector[] = {"hugo", "will", "guilher", "caio", "felipe"};
-
-			String listaOrdenada[] =  obj.selectionSort(vector);
-
-	            for(int i =0; i < vector.length; i++){
-	                System.out.println(listaOrdenada[i]);
-	            }
-
-	    }
-   */
-
 }//class

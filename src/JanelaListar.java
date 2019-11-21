@@ -131,7 +131,7 @@ public class JanelaListar extends JFrame {
 
 		tabelaPilha = new JTable();		
 		modeloPilha = (DefaultTableModel) tabelaPilha.getModel();
-		String[] colunas = { "Classe", "Nome", "Nome Cientifico", "Ano Extinto", "Pais de origem" };
+		String[] colunas = { "Classe", "Nome", "Nome Cientifico", "Pais de origem","Ano Extinto" };
 		modeloPilha.setColumnIdentifiers(colunas);
 
 		MenuPrincipal.p.mostrar();
@@ -143,12 +143,12 @@ public class JanelaListar extends JFrame {
 			conteudo = MenuPrincipal.p.listarElementos(aux);
 			
 			classe = conteudo.split(";")[0];
-			nome = conteudo.split(";")[1];
-			cientifico = conteudo.split(";")[2];
-			ano_extinto = conteudo.split(";")[3];
-			pais = conteudo.split(";")[4];
+			 nome = conteudo.split(";")[1];
+			 cientifico = conteudo.split(";")[2];
+			pais = conteudo.split(";")[3];
+			ano_extinto = conteudo.split(";")[4];
 
-			Object[] objects = { classe, nome, cientifico, ano_extinto, pais };
+			Object[] objects = { classe, nome, cientifico, pais, ano_extinto };
 			modeloPilha.addRow(objects);
 			aux--;
 		}
@@ -167,7 +167,7 @@ public class JanelaListar extends JFrame {
 		
 		tabelaFila = new JTable();		
 		modeloFila = (DefaultTableModel) tabelaFila.getModel();
-		String[] colunas = { "Classe", "Nome", "Nome Cientifico", "Ano Extinto", "Pais de origem" };
+		String[] colunas = { "Classe", "Nome", "Nome Cientifico", "Pais de origem", "Ano Extinto" };
 		modeloFila.setColumnIdentifiers(colunas);
 				
 		System.out.println("Existem " + MenuPrincipal.f.qntdeElementos + "elementos");
@@ -179,10 +179,10 @@ public class JanelaListar extends JFrame {
 			classe = conteudo.split(";")[0];
 			nome = conteudo.split(";")[1];
 			cientifico = conteudo.split(";")[2];
-			ano_extinto = conteudo.split(";")[3];
-			pais = conteudo.split(";")[4];
+			pais = conteudo.split(";")[3];
+			ano_extinto = conteudo.split(";")[4];
 
-			Object[] objects = { classe, nome, cientifico, ano_extinto, pais };
+			Object[] objects = { classe, nome, cientifico,  pais, ano_extinto};
 			
 			modeloFila.addRow(objects);
 		}

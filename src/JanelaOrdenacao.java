@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import javax.swing.JTextField;
 
 public class JanelaOrdenacao extends JFrame 
 {
@@ -32,6 +33,8 @@ public class JanelaOrdenacao extends JFrame
 	private static String[] selectionOrdenado;
 	private static String[] bubbleOrdenado;
  	private ResultSet rs;
+ 	private JTextField timerSeletion;
+ 	private JTextField timerBubbe;
 	
 	public JanelaOrdenacao() 
 	{		
@@ -92,25 +95,15 @@ public class JanelaOrdenacao extends JFrame
 		lblBubblesort.setBounds(170, 11, 181, 29);
 		panel_1.add(lblBubblesort);
 		
-		JTextPane bubbleTime = new JTextPane();
-		bubbleTime.setEditable(false);
-		bubbleTime.setBounds(65, 393, 75, 20);
-		panel_1.add(bubbleTime);
-		
 		JLabel lblBubbleTime = new JLabel("Tempo:");
 		lblBubbleTime.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblBubbleTime.setBounds(10, 393, 75, 20);
+		lblBubbleTime.setBounds(10, 393, 63, 20);
 		panel_1.add(lblBubbleTime);
 		
 		JLabel labelnsertion = new JLabel("Tempo:");
 		labelnsertion.setFont(new Font("Arial", Font.PLAIN, 16));
-		labelnsertion.setBounds(496, 393, 75, 20);
+		labelnsertion.setBounds(496, 393, 63, 20);
 		panel_1.add(labelnsertion);
-		
-		JTextPane insertionTime = new JTextPane();
-		insertionTime.setEditable(false);
-		insertionTime.setBounds(553, 393, 75, 20);
-		panel_1.add(insertionTime);
 		
 		puxarBanco();
 		selectionOrdenado = selection.selectionSort(vetor);
@@ -118,6 +111,21 @@ public class JanelaOrdenacao extends JFrame
 		bubbleOrdenado = bubble.getVetor();
 		listarSelection();
 		listarBubble();
+		
+		timerSeletion = new JTextField();
+		timerSeletion.setEditable(false);
+		timerSeletion.setBounds(68, 395, 86, 20);
+		panel_1.add(timerSeletion);
+		timerSeletion.setColumns(10);
+		
+		timerBubbe = new JTextField();
+		timerBubbe.setEditable(false);
+		timerBubbe.setBounds(557, 395, 86, 20);
+		panel_1.add(timerBubbe);
+		timerBubbe.setColumns(10);
+		
+		timerBubbe.setText(bubble.getTempoExecucao());
+		timerSeletion.setText(selection.getTempoExecucao());
 	}
 	
 	public static void listarSelection() 

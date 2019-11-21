@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -136,6 +137,8 @@ public class MenuPrincipal extends JFrame
 
 	public void importarDados() 
 	{
+		DB.connect("database.db3");
+		
 		// parametros de leitura/escrita
 		LerTxt leitura = new LerTxt();
 		FileSystemView system = FileSystemView.getFileSystemView();
@@ -161,15 +164,14 @@ public class MenuPrincipal extends JFrame
 			classe = conteudo.split(";")[0];
 			nome = conteudo.split(";")[1];
 			cientifico = conteudo.split(";")[2];
-			extinto = conteudo.split(";")[3];
-			pais = conteudo.split(";")[4];
+			pais = conteudo.split(";")[3];
+			extinto = conteudo.split(";")[4];
 
-			String text = "Classe   :" + classe +"Nome   :" + nome + "\n" + "Nome Cientifico:" + cientifico + "\n"
-					+ "Ano Extinto    :" + extinto + "\n" + "Pais de Origem :" + pais + "\n";
-			System.out.println(text);
-			Object[] objects = {classe, nome, cientifico,extinto,pais};
+			Object[] objects = {classe, nome, cientifico,pais,extinto};
 			modelo.addRow(objects);
 			
+			DB.execQuery("Insert into Animais ('nome_animal','nome_cientifico','ano_extinto','pais','classe') values ('"+nome+"','"+cientifico+"','"
+							+Integer.parseInt(extinto)+"','"+pais+"','"+classe+"')");
 			p.push(conteudo);
 			f.enqueue(conteudo);
 		}

@@ -205,7 +205,7 @@ public class NovoAnimal extends JFrame
 				String novoDado;
 
 				novoTexto = classeComboBox.getSelectedItem().toString() + ";" + nomeAnimal.getText() + ";"
-						+ nomeCientifico.getText() + ";" + anoExtinto.getText() +";" + paisComboBox.getSelectedItem()+";";
+						+ nomeCientifico.getText() + ";" + paisComboBox.getSelectedItem() +";" + anoExtinto.getText()+";";
 
 				novoDado = "INSERT INTO Animais (nome_animal,nome_cientifico,ano_extinto,pais,classe) values ('"
 						+ nomeAnimal.getText() + "','" + nomeCientifico.getText() + "','" + anoExtinto.getText() + "','"
